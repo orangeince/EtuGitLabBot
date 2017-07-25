@@ -40,9 +40,9 @@ routes.add(
 		if let bodyStr = request.postBodyString {
 			print("body: \(bodyStr)")
 		}
+		response.appendBody(string: "ok")
+		response.completed()
 	}
-	response.appendBody(string: "ok")
-	response.completed()
 )
 
 // Add the routes to the server.
