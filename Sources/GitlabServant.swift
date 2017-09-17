@@ -33,7 +33,7 @@ class GitlabServant {
         }
         guard let id = issueJson["id"] as? Int,
             let iid = issueJson["iid"] as? Int,
-            let assigneeId = issue["assignee_id"] as? Int,
+            let assigneeId = issueJson["assignee_id"] as? Int,
             let title = issueJson["title"] as? String else {
             print("issue data 解析失败")
             return
