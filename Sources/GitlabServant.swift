@@ -31,6 +31,7 @@ class GitlabServant {
             print("object_attributed 解析失败")
             return
         }
+        print("object_attrs:\(issueJson)")
         guard let issue = Issue(JSON: issueJson) else {
             print("issue data 解析失败")
             return
