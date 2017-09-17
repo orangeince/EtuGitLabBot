@@ -14,7 +14,7 @@ class GitlabServant {
             print("object_kind 解析失败!")
             return
         }
-        switch taskType: {
+        switch taskType {
             case "issue":
                 handleIssueTask(data: jsonDict)
             case "merge_request":
