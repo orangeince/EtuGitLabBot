@@ -27,6 +27,11 @@ struct Issue: Mappable {
         authorName <- map["author_name"]
         webUrl <- map["web_url"]
     }
+
+    var jsonStr: String {
+        return String(format: "{id: %d,iid: %d,title: %@,assigneeId: %d,state: %@,authorId: %d,author_name: %@,webUrl: %@}",
+                        id, iid, title, assigneeId, state, authorId, authorName, webUrl)
+    }
 }
 
 class FeedPool {
