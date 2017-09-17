@@ -68,6 +68,6 @@ class GitlabServant {
         }
         let jsonStrs = pool.issues.map{ $0.toJSONString(prettyPrint: true) }
         pool.issues.removeAll()
-        return "{[" + jsonStrs.joined(",") + "]}"
+        return "{[" + jsonStrs.joined(separator: ",") + "]}"
     }
 }
