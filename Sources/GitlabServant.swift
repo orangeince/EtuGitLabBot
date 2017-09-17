@@ -2,8 +2,7 @@ import PerfectLib
 
 class GitlabServant {
     static let shared: GitlabServant = GitlabServant()
-    //var feedStore: [Int: FeedPool] = [:]
-    var feedPool: FeedPool = FeedPool()
+    var feedStore: [Int: FeedPool] = [:]
 
     func didReceived(message: String) {
         guard let jsonDict = (try? message.jsonDecode()) as? [String: Any] else {
@@ -31,12 +30,17 @@ class GitlabServant {
             print("object_attributed 解析失败")
             return
         }
-        print("object_attrs:\(issueJson)")
+
         guard let issue = Issue(JSON: issueJson) else {
-            print("issue data 解析失败")
+            print("issue data 解析失败, object_attrs:\(issueJson)")
             return
         }
-        feedPool.issues.append(issue)
-        print("issues: \(feedPool.issues)")
+
+        guard let pool = feedStore[\(issue.assigneeId)] else {
+            print("has not found the subscriber of the issue: \(issue)")
+            return 
+        }
+
+        pool.issues.append(issue)
     }
 }
