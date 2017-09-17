@@ -27,12 +27,13 @@ class GitlabServant {
     }
 
     func handleIssueTask(data: [String: Any]) {
-        guard let issueJson = data["object_attributes"] as? [String: Any] else {
+        guard let issueJson = data["object_attributes"] as? [String: Any],
+                let issueJsonStr = try? issueJson.jsonEncodedString() else {
             print("object_attributed 解析失败")
             return
         }
-        print("object_attrs:\(issueJson)")
-        guard let issue = Issue(JSON: issueJson) else {
+        print("object_attrs:\(issueJsonStr)")
+        guard let issue = Issue(JSONString: issueJsonStr) else {
             print("issue data 解析失败")
             return
         }
