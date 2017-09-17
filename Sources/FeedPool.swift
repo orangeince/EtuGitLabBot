@@ -32,7 +32,7 @@ struct Issue: Mappable {
         guard let title = title, let state = state, let authorName = authorName, let webUrl = webUrl else {
             return "{}"
         }
-        return String(format: "{id: %d,iid: %d,title: \(title),assigneeId: %d,state: \(state),authorId: %d,author_name: \(authorName),webUrl: \(webUrl)}",
+        return String(format: "{\"id\": %d,\"iid\": %d,\"title\": \"\(title)\",\"assigneeId\": %d,\"state\": \"\(state)\",\"authorId\": %d,\"author_name\": \"\(authorName)\",\"webUrl\": \"\(webUrl)\"}",
                         id, iid, assigneeId, authorId)
     }
 }
