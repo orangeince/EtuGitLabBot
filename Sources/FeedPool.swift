@@ -17,8 +17,9 @@ struct Issue: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        id <- map["id"]
-        iid <- map["iid"]
+        let transform = TransformOf<Int, NSNumber>(fromJSON: { $0?.intValue }, toJSON: { $0.map { NSNumber(value: $0) } })
+        id <- (map["id"], transform)
+        iid <- (map["iid"], transform)
         title <- map["title"]
         assigneeId <- map["assignee_id"]
         state <- map["state"]
