@@ -55,6 +55,7 @@ class GitlabServant {
     }
     
     func activate(subscriber id: Int, filterLabel: String?) {
+        print("activate success: \(id)")
         feedStore[id] = FeedPool()
     }
 
