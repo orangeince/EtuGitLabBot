@@ -11,13 +11,13 @@ struct Issue: Mappable {
     var webUrl: String?
 
     init?(map: Map) {
-        guard let _ = map.JSON["id"] as? Int else {
+        if map.JSON["id"] == nil {
             return nil
         }
     }
 
     mutating func mapping(map: Map) {
-        let transform = TransformOf<Int, NSNumber>(fromJSON: { $0?.intValue }, toJSON: { $0.map { NSNumber(value: $0) } })
+        let transform = TransformOf<Int, Any>(fromJSON: { $0 as? Int }, toJSON: { $0.map { $0 } })
         id <- (map["id"], transform)
         iid <- (map["iid"], transform)
         title <- map["title"]
