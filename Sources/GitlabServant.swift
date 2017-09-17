@@ -47,7 +47,7 @@ class GitlabServant {
         }
 
         guard let pool = feedStore[issue.assigneeId] else {
-            print("has not found the subscriber of the issue: \(issue)")
+            //print("has not found the subscriber of the issue: \(issue)")
             return 
         }
 
@@ -63,7 +63,7 @@ class GitlabServant {
         guard let pool = feedStore[id] else {
             return "{}"
         }
-        print(pool.issues)
+        //print(pool.issues)
         guard !pool.issues.isEmpty else {
             return "{}"
         }
