@@ -1,5 +1,7 @@
 import PerfectLib
 
+typealias Dict = [String: Any]
+
 class GitlabServant {
     static let shared: GitlabServant = GitlabServant()
     var feedStore: [Int: FeedPool] = [:]
@@ -26,9 +28,17 @@ class GitlabServant {
     }
 
     func handleIssueTask(data: [String: Any]) {
-        guard let issueJson = data["object_attributes"] as? [String: Any] else {
+        guard var issueJson = data["object_attributes"] as? [String: Any] else {
             print("object_attributed 解析失败")
             return
+        }
+        if let user = data["user"] as? Dict {
+            issueJson["author_name"] = user["name"] as? String
+        }
+        if let project = data["project"] as? Dict, 
+            let projectUrl = project["web_url"] as? String,
+            let issueId = issueJson["iid"] as? Int {
+            issueJson["web_url"] = projectUrl + "issues/\(issueId)"
         }
 
         guard let issue = Issue(JSON: issueJson) else {
