@@ -37,7 +37,7 @@ class GitlabServant {
             print("issue data 解析失败")
             return
         }
-        print("issue: \(issue)")
         feedPool.issues.append(issue)
+        print("issues: \(feedPool.issues)")
     }
 }

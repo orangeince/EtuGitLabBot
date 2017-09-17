@@ -11,7 +11,7 @@ struct Issue: Mappable {
     var webUrl: String?
 
     init?(map: Map) {
-        if map.JSON["id"] == nil {
+        guard map.JSON["id"] as? Int else {
             return nil
         }
     }
