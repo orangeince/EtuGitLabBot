@@ -31,14 +31,10 @@ class GitlabServant {
             print("object_attributed 解析失败")
             return
         }
-        guard let id = issueJson["id"] as? Int,
-            let iid = issueJson["iid"] as? Int,
-            let assigneeId = issueJson["assignee_id"] as? Int,
-            let title = issueJson["title"] as? String else {
+        guard let issue = Issue(JSON: issueJson) else {
             print("issue data 解析失败")
             return
         }
-        let issue = Issue(id: id, iid: iid, title: title, assigneeId: assigneeId)
         print("issue: \(issue)")
         feedPool.issues.append(issue)
     }
