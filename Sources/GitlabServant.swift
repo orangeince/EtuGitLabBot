@@ -1,5 +1,4 @@
 import PerfectLib
-import SwiftyJSON
 
 class GitlabServant {
     static let shared: GitlabServant = GitlabServant()
@@ -11,14 +10,13 @@ class GitlabServant {
             print("json parse failed!!: \(message)")
             return 
         }
-        let json = JSON(jsonDict)
-        guard let taskType = json["object_kind"].string else {
+        guard let taskType = jsonDict["object_kind"] as? String else {
             print("object_kind 解析失败!")
             return
         }
         switch taskType: {
             case "issue":
-                handleIssueTask(data: json)
+                handleIssueTask(data: jsonDict)
             case "merge_request":
                 break
             case "note":
@@ -28,12 +26,15 @@ class GitlabServant {
         }
     }
 
-    func handleIssueTask(data: JSON) {
-        let issueJson = data["object_attributes"]
-        guard let id = issueJson["id"].int,
-            let iid = issueJson["iid"].int,
-            let assigneeId = issue["assignee_id"].int,
-            let title = issueJson["title"].string else {
+    func handleIssueTask(data: [String: Any]) {
+        guard let issueJson = data["object_attributes"] as? [String: Any] else {
+            print("object_attributed 解析失败")
+            return
+        }
+        guard let id = issueJson["id"] as? Int,
+            let iid = issueJson["iid"] as? Int,
+            let assigneeId = issue["assignee_id"] as? Int,
+            let title = issueJson["title"] as? String else {
             print("issue data 解析失败")
             return
         }
