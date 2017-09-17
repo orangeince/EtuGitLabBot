@@ -21,9 +21,9 @@ struct Issue: Mappable {
         id <- (map["id"], transform)
         iid <- (map["iid"], transform)
         title <- map["title"]
-        assigneeId <- map["assignee_id"]
+        assigneeId <- (map["assignee_id"], transform)
         state <- map["state"]
-        authorId <- map["author_id"]
+        authorId <- (map["author_id"], transform)
         authorName <- map["author_name"]
         webUrl <- map["web_url"]
     }
