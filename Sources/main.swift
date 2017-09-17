@@ -38,13 +38,8 @@ routes.add(
 	method: .post, uri: "/etugit/", handler: {
 		request, response in
 		if let bodyStr = request.postBodyString {
-			if let jsonDict = try bodyStr.jsonDecode() as? [String: Any] {
-				print("Json parse succeed!")
-				print(jsonDict)
-			} else {
-				print("Json parse failed!!!!!")
-				print("body: \(bodyStr)")
-			}
+			print("received request body:\n\(bodyStr)")
+			GitlabServant.shared.didReceived(message: bodyStr)
 		}
 		response.appendBody(string: "ok")
 		response.completed()
