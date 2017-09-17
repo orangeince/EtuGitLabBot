@@ -29,6 +29,9 @@ struct Issue: Mappable {
     }
 
     var jsonStr: String {
+        guard let title = title, let state = state, let authorName = authorName, webUrl = webUrl else {
+            return "{}"
+        }
         return String(format: "{id: %d,iid: %d,title: %@,assigneeId: %d,state: %@,authorId: %d,author_name: %@,webUrl: %@}",
                         id, iid, title, assigneeId, state, authorId, authorName, webUrl)
     }
