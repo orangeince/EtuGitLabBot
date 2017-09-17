@@ -38,7 +38,13 @@ routes.add(
 	method: .post, uri: "/etugit/", handler: {
 		request, response in
 		if let bodyStr = request.postBodyString {
-			print("body: \(bodyStr)")
+			if let jsonDict = try bodyStr.jsonDecode() as? [String: Any] {
+				print("Json parse succeed!")
+				print(jsonDict)
+			} else {
+				print("Json parse failed!!!!!")
+				print("body: \(bodyStr)")
+			}
 		}
 		response.appendBody(string: "ok")
 		response.completed()
@@ -49,7 +55,7 @@ routes.add(
 server.addRoutes(routes)
 
 // Set a listen port of 8181
-server.serverPort = 12333
+server.serverPort = 12322
 
 // Set a document root.
 // This is optional. If you do not want to serve static content then do not set this.
