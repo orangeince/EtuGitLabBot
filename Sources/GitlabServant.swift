@@ -38,7 +38,7 @@ class GitlabServant {
         if let project = data["project"] as? Dict, 
             let projectUrl = project["web_url"] as? String,
             let issueId = issueJson["iid"] as? Int {
-            issueJson["web_url"] = projectUrl + "issues/\(issueId)"
+            issueJson["web_url"] = projectUrl + "/issues/\(issueId)"
         }
 
         guard let issue = Issue(JSON: issueJson) else {

@@ -7,8 +7,8 @@ struct Issue: Mappable {
     var assigneeId: Int!
     var state: String!
     var authorId: Int!
-    var authorName: String?
-    var webUrl: String?
+    var authorName: String!
+    var webUrl: String!
 
     init?(map: Map) {
         if map.JSON["id"] == nil {
