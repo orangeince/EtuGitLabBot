@@ -36,7 +36,7 @@ class GitlabServant {
             return
         }
 
-        guard let pool = feedStore[\(issue.assigneeId)] else {
+        guard let pool = feedStore[issue.assigneeId] else {
             print("has not found the subscriber of the issue: \(issue)")
             return 
         }
