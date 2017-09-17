@@ -66,7 +66,7 @@ class GitlabServant {
         guard !pool.issues.isEmpty else {
             return "{}"
         }
-        let jsonStrs = pool.issues.flatMap{ $0.toJSONString(prettyPrint: true) }
+        let jsonStrs = pool.issues.flatMap{ $0.toJSONString() }
         pool.issues.removeAll()
         return "{[" + jsonStrs.joined(separator: ",") + "]}"
     }
