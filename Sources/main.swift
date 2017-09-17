@@ -63,7 +63,7 @@ routes.add(method: .get, uri: "/etugit/feed/", handler: {
 		request, response in
 		if let userIdStr = request.param(name: "user_id"),
 			let userId = Int(userIdStr) {
-			response.appendBody(string: GitlabServant.shared.getFeed(subscriber: userId))
+			response.appendBody(string: GitlabServant.shared.getFeedFor(subscriber: userId))
 		} else {
 			response.appendBody(string: "error: no user_id")
 		}
