@@ -46,6 +46,31 @@ routes.add(
 	}
 )
 
+routes.add(
+	method: .post, uri: "/etugit/activate_subscribe/", handler: {
+		request, response in
+		if let userIdStr = request.param(name: "user_id"),
+			let userId = Int(userIdStr) {
+			let mrFilterLabel = request.param(name: "mr_label")
+			GitlabServant.shared.activate(subscriber: userId, filterLabel: mrFilterLabel)
+		}
+		response.appendBody(string: "ok")
+		response.completed()
+	}
+)
+
+routes.add(method: .get, uri: "/etugit/feed/", handler: {
+		request, response in
+		if let userIdStr = request.param(name: "user_id"),
+			let userId = Int(userIdStr) {
+			response.appendBody(string: GitlabServant.shared.getFeed(subscriber: userId))
+		} else {
+			response.appendBody(string: "error: no user_id")
+		}
+		response.completed()
+	}
+)
+
 // Add the routes to the server.
 server.addRoutes(routes)
 

@@ -53,4 +53,21 @@ class GitlabServant {
 
         pool.issues.append(issue)
     }
+    
+    func activate(subscriber id: Int, filterLabel: String?) {
+        feedStore[id] = FeedPool()
+    }
+
+    func getFeedFor(subscriber id: Int) -> String {
+        guard let pool = feedStore[id] else {
+            return "{}"
+        }
+        print(pool.issues)
+        guard !pool.issues.isEmpty else {
+            return "{}"
+        }
+        let issues = pool.issues.map{ $0.toJSONString(prettyPrint: true) }
+        pool.issues.removeAll()
+        return "{[" + issues.joined(",") + "]}"
+    }
 }
